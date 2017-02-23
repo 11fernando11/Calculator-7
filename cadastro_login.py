@@ -79,7 +79,7 @@ def abrir_calculator7():
 
 
 def destruir_cadastro():
-    global lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2,lbEscolha
+    global lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2,lbEscolha,msg
     lb1.destroy()
     lb2.destroy()
     lb3.destroy()
@@ -88,6 +88,7 @@ def destruir_cadastro():
     bt1.destroy()
     bt2.destroy()
     lbEscolha.destroy()
+    msg.destroy()
 
 def destruir_login():
     global lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2,lbEscolha
@@ -140,15 +141,15 @@ def cadastrando_db():
     lista.append(usuario)
     lista.append(senha)
     if "" in lista:
-        msg.destroy()
+        #msg.destroy()
         msg = Label(janela,text="Preencha todos os campos",font=fonte1)
         msg.grid(row=7,column=0)
     else:
         cursor.execute("""INSERT INTO cadastro(usuario,senha)VALUES(?,?)""",(usuario,senha))
         conn.commit()
         conn.close()
-        msg.destroy()
-        msg = Label(janela,text="Cadastrado",font=fonte1)
+        #msg.destroy()
+        msg = Label(janela,text="Cadastrado...",font=fonte1)
         msg.grid(row=7,column=0)
 
 def validando():
@@ -166,13 +167,16 @@ def validando():
         else:
             lista.append(0)
     if 1 in lista:
+        janela.destroy()
         import Calculator_7
     else:
-        msg.destroy()
+        try:
+            msg.destroy()
+        except:
+            print()
         msg = Label(janela,font=fonte1,text="Conta inválida")
         msg.grid(row=7,column=0)
         
-
 
 menu()
 janela.geometry("315x270")   
