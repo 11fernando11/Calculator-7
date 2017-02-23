@@ -1,12 +1,12 @@
 from tkinter import *
 import sqlite3
+
 janela = Tk()
 janela["background"] = "gray"
-
 fonte1 = ("arial", "15")    
     
-def criar_login(): 
-    
+def criar_login():     
+
     global lb,lb1,lb2,ed1,ed2,bt1,bt2,lb3
     
     lb1 = Label(janela,text="LOGIN",font=("arial","20"), background="gray")
@@ -15,8 +15,6 @@ def criar_login():
 
     ed1 = Entry(janela,width=10,font=fonte1)
     ed2 = Entry(janela,width=10,font=fonte1,show='*')
-    #ed2 = Spinbox(janela,width=10,font=fonte1,show='*',from_=0,to=10)
-    #ed2 = Spinbox(janela,from_=0,to=10)
 
     bt1 = Button(janela,text="Acessar",font=fonte1,background="blue",command=validando)
     bt2 = Button(janela,text="Cadastrar",font=fonte1,background="blue",command=cadastrar)
@@ -42,7 +40,7 @@ def criar_cadastro():
 
     bt1= Button(janela,text="Cadastrar",font=fonte1,width=10,bg="blue",command=cadastrando_db)
     bt2= Button(janela,text="Voltar",font=fonte1,width=10,command=voltar, bg="blue")
-    msg = Label(janela,text="Aguardando..",font=fonte1)
+    msg = Label(janela,text="Aguardando...",font=fonte1,bg="gray")
     
     lb1.grid(row=1,column=0)
     lb2.grid(row=3,column=0)
@@ -51,10 +49,11 @@ def criar_cadastro():
     ed2.grid(row=4,column=1)
     bt1.grid(row=6,column=1)
     bt2.grid(row=6,column=0)
-    msg.grid(row=7,column=0)
+    msg.place(x=100, y = 180)
 
 def criar_menu():
     global lbEscolha,lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2
+    
     lb1 = Label(janela,text='CALCULATOR', font=("arial","20"), bg="gray")
     lbEscolha = Label(janela,text='Menu das calculadoras', font=fonte1, bg="gray")
     lb2 = Label(janela,text='CALCULATOR',font=("Times","15"),background="gray")
@@ -127,7 +126,6 @@ def cadastrar():
     destruir_login()
     criar_cadastro()
 
-
 def login():
     global lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2,lbEscolha
     destruir_menu()
@@ -179,7 +177,6 @@ def validando():
         msg = Label(janela,font=fonte1,text="Conta inválida")
         msg.grid(row=7,column=0)
         
-
 menu()
 janela.geometry("315x270")   
 janela.resizable(False,False)
