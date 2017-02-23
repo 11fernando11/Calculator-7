@@ -3,46 +3,7 @@ import sqlite3
 janela = Tk()
 janela["background"] = "gray"
 
-fonte1 = ("arial", "15")
-def cadastrando_db():
-    global ed1,ed2,msg
-    conn = sqlite3.connect("cadastro.db")
-    cursor = conn.cursor()
-    usuario = ed1.get()
-    senha = ed2.get()
-    
-    cursor.execute("""INSERT INTO cadastro(usuario,senha)VALUES(?,?)""",(usuario,senha))
-    conn.commit()
-    conn.close()
-    msg.destroy()
-    msg = Label(janela,text="Cadastrado",font=fonte1)
-    msg.grid(row=7,column=0)
-def validando():
-    global ed1,ed2,msg
-    conn = sqlite3.connect("cadastro.db")
-    lista = []
-    cursor = conn.cursor()
-    usuario = ed1.get()
-    senha = ed2.get()
-    cursor.execute("""SELECT usuario,senha FROM cadastro;""")
-    for linha in cursor.fetchall():
-        if usuario in linha:
-            if senha in linha:
-                lista.append(1)
-        else:
-            lista.append(0)
-    if 1 in lista:
-        import Calculator_7
-    else:
-        msg.destroy()
-        msg = Label(janela,font=fonte1,text="Conta inválida")
-        msg.grid(row=7,column=0)
-        
-        
-    
-        
-        
-    
+fonte1 = ("arial", "15")    
     
 def criar_login(): 
     
@@ -167,6 +128,42 @@ def login():
     global lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2,lbEscolha
     destruir_menu()
     criar_login()
+
+def cadastrando_db():
+    global ed1,ed2,msg
+    conn = sqlite3.connect("cadastro.db")
+    cursor = conn.cursor()
+    usuario = ed1.get()
+    senha = ed2.get()
+    
+    cursor.execute("""INSERT INTO cadastro(usuario,senha)VALUES(?,?)""",(usuario,senha))
+    conn.commit()
+    conn.close()
+    msg.destroy()
+    msg = Label(janela,text="Cadastrado",font=fonte1)
+    msg.grid(row=7,column=0)
+
+def validando():
+    global ed1,ed2,msg
+    conn = sqlite3.connect("cadastro.db")
+    lista = []
+    cursor = conn.cursor()
+    usuario = ed1.get()
+    senha = ed2.get()
+    cursor.execute("""SELECT usuario,senha FROM cadastro;""")
+    for linha in cursor.fetchall():
+        if usuario in linha:
+            if senha in linha:
+                lista.append(1)
+        else:
+            lista.append(0)
+    if 1 in lista:
+        import Calculator_7
+    else:
+        msg.destroy()
+        msg = Label(janela,font=fonte1,text="Conta inválida")
+        msg.grid(row=7,column=0)
+        
 
 
 menu()
