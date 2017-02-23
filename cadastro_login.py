@@ -15,6 +15,8 @@ def criar_login():
 
     ed1 = Entry(janela,width=10,font=fonte1)
     ed2 = Entry(janela,width=10,font=fonte1,show='*')
+    #ed2 = Spinbox(janela,width=10,font=fonte1,show='*',from_=0,to=10)
+    #ed2 = Spinbox(janela,from_=0,to=10)
 
     bt1 = Button(janela,text="Acessar",font=fonte1,background="blue",command=validando)
     bt2 = Button(janela,text="Cadastrar",font=fonte1,background="blue",command=cadastrar)
@@ -141,14 +143,14 @@ def cadastrando_db():
     lista.append(usuario)
     lista.append(senha)
     if "" in lista:
-        #msg.destroy()
+        msg.destroy()
         msg = Label(janela,text="Preencha todos os campos",font=fonte1)
         msg.grid(row=7,column=0)
     else:
         cursor.execute("""INSERT INTO cadastro(usuario,senha)VALUES(?,?)""",(usuario,senha))
         conn.commit()
         conn.close()
-        #msg.destroy()
+        msg.destroy()
         msg = Label(janela,text="Cadastrado...",font=fonte1)
         msg.grid(row=7,column=0)
 
