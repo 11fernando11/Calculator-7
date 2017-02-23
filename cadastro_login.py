@@ -114,8 +114,9 @@ def menu():
     criar_menu()
 
 def voltar():
-    global lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2,lbEscolha
+    global lb,lb1,lb2,lb3,ed1,ed2,bt1,bt2,lbEscolha,msg
     destruir_cadastro()
+    msg.destroy()
     criar_login()
 
 def cadastrar():
@@ -131,17 +132,24 @@ def login():
 
 def cadastrando_db():
     global ed1,ed2,msg
+    lista = []
     conn = sqlite3.connect("cadastro.db")
     cursor = conn.cursor()
     usuario = ed1.get()
     senha = ed2.get()
-    
-    cursor.execute("""INSERT INTO cadastro(usuario,senha)VALUES(?,?)""",(usuario,senha))
-    conn.commit()
-    conn.close()
-    msg.destroy()
-    msg = Label(janela,text="Cadastrado",font=fonte1)
-    msg.grid(row=7,column=0)
+    lista.append(usuario)
+    lista.append(senha)
+    if "" in lista:
+        msg.destroy()
+        msg = Label(janela,text="Preencha todos os campos",font=fonte1)
+        msg.grid(row=7,column=0)
+    else:
+        cursor.execute("""INSERT INTO cadastro(usuario,senha)VALUES(?,?)""",(usuario,senha))
+        conn.commit()
+        conn.close()
+        msg.destroy()
+        msg = Label(janela,text="Cadastrado",font=fonte1)
+        msg.grid(row=7,column=0)
 
 def validando():
     global ed1,ed2,msg
